@@ -13,21 +13,21 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Category implements Serializable{
-	
+public class Category implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	
+
 	@JsonManagedReference
-	@ManyToMany(mappedBy="categories")
+	@ManyToMany(mappedBy = "categories")
 	private List<Product> products = new ArrayList<Product>();
-	
+
 	public Category() {
-		
+
 	}
 
 	public Category(Integer id, String name) {
@@ -59,7 +59,7 @@ public class Category implements Serializable{
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-		
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,6 +84,5 @@ public class Category implements Serializable{
 			return false;
 		return true;
 	}
-
 
 }
