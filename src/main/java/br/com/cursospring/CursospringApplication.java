@@ -7,12 +7,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import br.com.cursospring.domain.Address;
 import br.com.cursospring.domain.Category;
 import br.com.cursospring.domain.City;
+import br.com.cursospring.domain.Client;
 import br.com.cursospring.domain.Product;
 import br.com.cursospring.domain.State;
+import br.com.cursospring.domain.enums.TypeClient;
+import br.com.cursospring.repositories.AddressRepository;
 import br.com.cursospring.repositories.CategoryRepository;
 import br.com.cursospring.repositories.CityRepository;
+import br.com.cursospring.repositories.ClientRepository;
 import br.com.cursospring.repositories.ProductRepository;
 import br.com.cursospring.repositories.StateRepository;
 
@@ -21,7 +26,7 @@ public class CursospringApplication implements CommandLineRunner {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
-
+	
 	@Autowired
 	private ProductRepository productRepository;
 	
@@ -30,6 +35,12 @@ public class CursospringApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CityRepository cityRepository;
+	
+	@Autowired
+	private ClientRepository clientRepository;
+	
+	@Autowired
+	private AddressRepository addressRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursospringApplication.class, args);
@@ -66,6 +77,16 @@ public class CursospringApplication implements CommandLineRunner {
 		
 		stateRepository.saveAll(Arrays.asList(estOne, estTwo));
 		cityRepository.saveAll(Arrays.asList(cityOne, cityTwo, cityThree));
+		
+		Client cliOne = new Client(null, "Mariana", "mariana@gmail.com", "33344455506", TypeClient.PHYSICALPERSON);
+		cliOne.getPhones().addAll(Arrays.asList("33999887766", "31988776655"));
+		
+		Address adOne = new Address(null, "Rua Padre Tiago", "316", "Ap 201", "Camargos", "30520-440", cliOne, cityTwo);
+		Address adTwo = new Address(null, "Av. Tancredo Neves", "1084", "A", "Nazaré", "35170-054", cliOne, cityOne);
+		cliOne.getAdresses().addAll(Arrays.asList(adOne, adTwo));
+		
+		clientRepository.saveAll(Arrays.asList(cliOne));
+		addressRepository.saveAll(Arrays.asList(adOne, adTwo));
 		
 	}
 }
