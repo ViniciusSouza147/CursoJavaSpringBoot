@@ -48,7 +48,7 @@ public class Client implements Serializable {
 		this.type = type.getCod();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

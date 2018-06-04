@@ -14,7 +14,7 @@ public class Address implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer	id;
 	private String publicPlace;
 	private String number;
@@ -47,7 +47,7 @@ public class Address implements Serializable{
 		this.city = city;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -134,7 +134,6 @@ public class Address implements Serializable{
 			return false;
 		return true;
 	}
-
 
 	
 }
