@@ -29,7 +29,7 @@ public class Client implements Serializable {
 	private String email;
 	private String cpfOuCnpj;
 	private Integer type;
-	
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "client")
 	private List<Address> adresses = new ArrayList<Address>();
@@ -37,6 +37,9 @@ public class Client implements Serializable {
 	@ElementCollection
 	@CollectionTable(name = "PHONE")
 	private Set<String> phones = new HashSet<>();
+
+	@OneToMany(mappedBy = "client")
+	private List<Order> requests = new ArrayList<Order>();
 
 	public Client() {
 
@@ -105,6 +108,14 @@ public class Client implements Serializable {
 
 	public void setPhones(Set<String> phones) {
 		this.phones = phones;
+	}
+
+	public List<Order> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(List<Order> requests) {
+		this.requests = requests;
 	}
 
 	@Override
