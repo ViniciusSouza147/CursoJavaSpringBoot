@@ -15,8 +15,8 @@ public class PayTicket extends Payment{
 	
 	public PayTicket() {}
 
-	public PayTicket(Integer id, StatusPayment status, Order order, Date dueDate, Date paymentDate) {
-		super(id, status, order);
+	public PayTicket(Integer id, StatusPayment status, Request request, Date dueDate, Date paymentDate) {
+		super(id, status, request);
 		this.dueDate = dueDate;
 		this.paymentDate = paymentDate;
 	}

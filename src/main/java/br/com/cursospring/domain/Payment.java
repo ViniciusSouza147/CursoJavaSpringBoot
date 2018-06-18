@@ -22,18 +22,18 @@ public abstract class Payment implements Serializable{
 	private Integer status;
 	
 	@OneToOne
-	@JoinColumn(name="order_id")
+	@JoinColumn(name="request_id")
 	@MapsId
-	private Order order;
+	private Request request;
 	
 	public Payment() {
 	}
 
-	public Payment(Integer id, StatusPayment status, Order order) {
+	public Payment(Integer id, StatusPayment status, Request request) {
 		super();
 		this.id = id;
 		this.status = status.getCod();
-		this.order = order;
+		this.request = request;
 	}
 
 	public Integer getId() {
@@ -52,12 +52,12 @@ public abstract class Payment implements Serializable{
 		this.status = status.getCod();
 	}
 
-	public Order getOrder() {
-		return order;
+	public Request getRequestr() {
+		return request;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setRequest(Request request) {
+		this.request = request;
 	}
 
 	@Override

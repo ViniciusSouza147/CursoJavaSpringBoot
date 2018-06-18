@@ -32,14 +32,14 @@ public class Client implements Serializable {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "client")
-	private List<Address> adresses = new ArrayList<Address>();
+	private List<Address> adresses = new ArrayList<>();
 
 	@ElementCollection
 	@CollectionTable(name = "PHONE")
 	private Set<String> phones = new HashSet<>();
 
 	@OneToMany(mappedBy = "client")
-	private List<Order> requests = new ArrayList<Order>();
+	private List<Request> requests = new ArrayList<>();
 
 	public Client() {
 
@@ -110,11 +110,11 @@ public class Client implements Serializable {
 		this.phones = phones;
 	}
 
-	public List<Order> getRequests() {
+	public List<Request> getRequests() {
 		return requests;
 	}
 
-	public void setRequests(List<Order> requests) {
+	public void setRequests(List<Request> requests) {
 		this.requests = requests;
 	}
 
