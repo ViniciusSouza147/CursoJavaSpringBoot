@@ -17,6 +17,7 @@ import br.com.cursospring.domain.Payment;
 import br.com.cursospring.domain.PaymentCard;
 import br.com.cursospring.domain.Product;
 import br.com.cursospring.domain.Request;
+import br.com.cursospring.domain.RequestItem;
 import br.com.cursospring.domain.State;
 import br.com.cursospring.domain.enums.StatusPayment;
 import br.com.cursospring.domain.enums.TypeClient;
@@ -26,6 +27,7 @@ import br.com.cursospring.repositories.CityRepository;
 import br.com.cursospring.repositories.ClientRepository;
 import br.com.cursospring.repositories.PaymentRepository;
 import br.com.cursospring.repositories.ProductRepository;
+import br.com.cursospring.repositories.RequestItemRepository;
 import br.com.cursospring.repositories.RequestRepository;
 import br.com.cursospring.repositories.StateRepository;
 
@@ -55,6 +57,9 @@ public class CursospringApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PaymentRepository paymentRepository;
+	
+	@Autowired
+	private RequestItemRepository requestItemRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursospringApplication.class, args);
@@ -103,19 +108,29 @@ public class CursospringApplication implements CommandLineRunner {
 		addressRepository.saveAll(Arrays.asList(adOne, adTwo));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		Request ordOne = new Request(null, sdf.parse("30/09/2018 12:30"), cliOne, adOne);
-		Request ordTwo = new Request(null, sdf.parse("02/10/2018 14:30"), cliOne, adTwo);
+		Request reqOne = new Request(null, sdf.parse("30/09/2018 12:30"), cliOne, adOne);
+		Request reqTwo = new Request(null, sdf.parse("02/10/2018 14:30"), cliOne, adTwo);
 		
-		Payment payOne = new PaymentCard(null, StatusPayment.SETTLED, ordOne, 6);
-		ordOne.setPayment(payOne);
+		Payment payOne = new PaymentCard(null, StatusPayment.SETTLED, reqOne, 6);
+		reqOne.setPayment(payOne);
 		
-		Payment payTwo = new PayTicket(null, StatusPayment.PENDING, ordTwo, sdf.parse("20/10/18 00:00"), null);
-		ordTwo.setPayment(payTwo);
+		Payment payTwo = new PayTicket(null, StatusPayment.PENDING, reqTwo, sdf.parse("20/10/18 00:00"), null);
+		reqTwo.setPayment(payTwo);
 		
-		cliOne.getRequests().addAll(Arrays.asList(ordOne, ordTwo));
+		cliOne.getRequests().addAll(Arrays.asList(reqOne, reqTwo));
 		
-		requestRepository.saveAll(Arrays.asList(ordOne, ordTwo));
+		requestRepository.saveAll(Arrays.asList(reqOne, reqTwo));
 		paymentRepository.saveAll(Arrays.asList(payOne, payTwo));
+		
+		RequestItem riOne = new RequestItem(reqOne, productOne, 0.00, 1, 2000.00);
+		RequestItem riTwo = new RequestItem(reqOne, productThree, 0.00, 1, 80.00);
+		RequestItem riThree = new RequestItem(reqTwo, productTwo, 0.00, 1, 80.00);
+		
+		productOne.getItens().addAll(Arrays.asList(riOne));
+		productTwo.getItens().addAll(Arrays.asList(riThree));
+		productThree.getItens().addAll(Arrays.asList(riTwo));
+		
+		requestItemRepository.saveAll(Arrays.asList(riOne, riTwo, riThree));	
 		
 	}
 }
