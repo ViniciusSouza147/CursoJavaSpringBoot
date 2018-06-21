@@ -6,10 +6,13 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 @Embeddable
-public class RequestItemKPK implements Serializable{
+public class RequestItemPK implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="request_id")
 	private Request request;
@@ -47,7 +50,7 @@ public class RequestItemKPK implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RequestItemKPK other = (RequestItemKPK) obj;
+		RequestItemPK other = (RequestItemPK) obj;
 		if (product == null) {
 			if (other.product != null)
 				return false;

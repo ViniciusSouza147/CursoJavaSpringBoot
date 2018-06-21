@@ -5,22 +5,25 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class RequestItem implements Serializable{
+public class RequestItem implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
+	@JsonIgnore
 	@EmbeddedId
-	private RequestItemKPK id = new RequestItemKPK();
-	
+	private RequestItemPK id = new RequestItemPK();
+
 	private Double discount;
 	private Integer amount;
 	private Double price;
-	
+
 	public RequestItem() {
-		
+
 	}
 
-	public RequestItem(Request request, Product product , Double discount, Integer amount, Double price) {
+	public RequestItem(Request request, Product product, Double discount, Integer amount, Double price) {
 		super();
 		id.setRequest(request);
 		id.setProduct(product);
@@ -28,7 +31,8 @@ public class RequestItem implements Serializable{
 		this.amount = amount;
 		this.price = price;
 	}
-	
+
+	@JsonIgnore
 	public Request getRequest() {
 		return id.getRequest();
 	}
@@ -37,11 +41,11 @@ public class RequestItem implements Serializable{
 		return id.getProduct();
 	}
 
-	public RequestItemKPK getId() {
+	public RequestItemPK getId() {
 		return id;
 	}
 
-	public void setId(RequestItemKPK id) {
+	public void setId(RequestItemPK id) {
 		this.id = id;
 	}
 
@@ -93,5 +97,5 @@ public class RequestItem implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }
