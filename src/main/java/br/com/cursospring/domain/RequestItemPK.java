@@ -6,13 +6,10 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import net.minidev.json.annotate.JsonIgnore;
-
 @Embeddable
 public class RequestItemPK implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="request_id")
 	private Request request;

@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import br.com.cursospring.domain.enums.StatusPayment;
 
 @Entity
@@ -14,10 +13,13 @@ public class PayTicket extends Payment{
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dueDate;
+	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date paymentDate;
 	
-	public PayTicket() {}
+	public PayTicket() {
+		
+	}
 
 	public PayTicket(Integer id, StatusPayment status, Request request, Date dueDate, Date paymentDate) {
 		super(id, status, request);
